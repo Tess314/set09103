@@ -12,7 +12,7 @@ def hello():
 @app.route('/static-example/img')
 def static_example_img():
     start = '<img src="'
-    url = url_for('static', filename='book.jpg')
+    url = url_for('static', filename='book.png')
     end = '">'
     return start+url+end, 200
 
