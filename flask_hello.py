@@ -1,28 +1,32 @@
-from flask import Flask, url_for
+from flask import Flask, url_for, render_template
 app = Flask(__name__)
 
 @app.route("/")
 def root():
-	return "The default, 'root' route"
+	return "TTTLE"
 
-@app.route("/hello/")
+@app.route("/login/")
 def hello():
-    return "Hello Napier"
+    return "LOG IN"
 
-@app.route('/static-example/img')
-def static_example_img():
+@app.route('/static-example')
+def static_example():
     start = '<img src="'
     url = url_for('static', filename='book.png')
     end = '">'
     return start+url+end, 200
 
-@app.route("/goodbye/")
+@app.route("/welcome/")
 def goodbye():
-    return "Goodbye World"
+    return "WELCOME"
 
 @app.errorhandler(404)
 def page_not_found(error):
-    return "Error 404: Couldn't find the page you requested.", 404
+    start = '<img src="'
+    url = url_for('static', filename='alice.gif')
+    end = '">'
+    image = start+url+end
+    return image + "Error 404: You've fallen down the rabbit hole.", 404
 
 if __name__ == "main":
     app.run(host='0.0.0.0', debug=True)
