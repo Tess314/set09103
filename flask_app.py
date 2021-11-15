@@ -1,4 +1,4 @@
-from flask import Flask, url_for, request
+from flask import Flask, url_for, request, render_template
 app = Flask(__name__)
 
 @app.route("/")
@@ -16,24 +16,7 @@ def log_in():
         branch = request.form['branch']
         return "Hello, %s" % username
     else:
-        page = '''
-        <html><body>
-        <form action="" method="post" name="form">
-        <label for="username">Username:</label>
-        <input type="text" name="username" id="username"/><br><br>
-        <label for="password">Password:</label>
-        <input type="text" name="password" id="password"/><br><br>
-        <label for="branch">Branch:</label>
-        <select name="branch" id="branch">
-            <option value="piershill">Piershill</option>
-            <option value="central">Central Library</option>
-            <option value="portobello">Portobello</option>
-        </select><br><br>
-        <input type="submit" name="login" id="submit"/>
-        </form>
-        </body></html>'''
-
-        return page
+        return render_template('login.html')
 
 @app.route('/static-example')
 def static_example():
@@ -49,15 +32,7 @@ def welcome():
         search = request.form['search']
         return "You searched for: %s" % search
     else:
-        page = '''
-        <html><body>
-        <form action="" method="post" name="form">
-        <input type="text" name="search" id="search"/>
-        <input type="submit" name="search" id="submit"/>
-        </form>
-        </body></html>'''
-
-        return page
+        return render_template('welcome.html')
 
 @app.errorhandler(404)
 def page_not_found(error):
@@ -66,6 +41,10 @@ def page_not_found(error):
     end = '">'
     image = start+url+end
     return image + "Error 404: You've fallen down the rabbit hole.", 404
+
+@app.route('/test/')
+def test():
+    return render_template('index.html')
 
 if __name__ == "main":
     app.run(host='0.0.0.0', debug=True)
