@@ -29,7 +29,7 @@ def log_in():
             <option value="central">Central Library</option>
             <option value="portobello">Portobello</option>
         </select><br><br>
-        <input type="submit" name="Log In" id="submit"/>
+        <input type="submit" name="login" id="submit"/>
         </form>
         </body></html>'''
 
@@ -42,9 +42,22 @@ def static_example():
     end = '">'
     return start+url+end, 200
 
-@app.route("/welcome/")
+@app.route("/welcome/", methods=['POST','GET'])
 def welcome():
-    return "WELCOME"
+    if request.method == 'POST':
+        print(request.form)
+        search = request.form['search']
+        return "You searched for: %s" % search
+    else:
+        page = '''
+        <html><body>
+        <form action="" method="post" name="form">
+        <input type="text" name="search" id="search"/>
+        <input type="submit" name="search" id="submit"/>
+        </form>
+        </body></html>'''
+
+        return page
 
 @app.errorhandler(404)
 def page_not_found(error):
