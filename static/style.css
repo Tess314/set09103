@@ -1,3 +1,8 @@
 body {
   background-color: #38b6ff;
 }
+
+.formDiv {
+  display: inline-block;
+  text-align: center;
+}
