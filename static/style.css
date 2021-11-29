@@ -3,6 +3,10 @@ body {
   text-align: center;
 }
 
+h1 {
+  text-align: center;
+}
+
 .formDiv {
   display: inline-block;
   text-align: center;
