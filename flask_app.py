@@ -1,4 +1,4 @@
-from flask import Flask, url_for, request, render_template
+from flask import Flask, url_for, request, render_template, redirect
 app = Flask(__name__)
 
 @app.route("/")
@@ -14,16 +14,9 @@ def log_in():
         password = request.form['password']
         print(request.form)
         branch = request.form['branch']
-        return "Hello, %s" % username
+        return redirect('/welcome/')
     else:
         return render_template('login.html')
-
-@app.route('/static-example')
-def static_example():
-    start = '<img src="'
-    url = url_for('static', filename='book.png')
-    end = '">'
-    return start+url+end, 200
 
 @app.route("/welcome/", methods=['POST','GET'])
 def welcome():
@@ -40,11 +33,7 @@ def page_not_found(error):
     url = url_for('static', filename='alice.gif')
     end = '">'
     image = start+url+end
-    return image + "Error 404: You've fallen down the rabbit hole.", 404
-
-@app.route('/test/')
-def test():
-    return render_template('index.html')
+    return image + render_template("error.html"), 404
 
 if __name__ == "main":
     app.run(host='0.0.0.0', debug=True)
