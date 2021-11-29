@@ -27,6 +27,10 @@ def welcome():
     else:
         return render_template('welcome.html')
 
+@app.route("/add/")
+def add():
+    return render_template('add.html')
+
 @app.errorhandler(404)
 def page_not_found(error):
     start = '<img src="'
