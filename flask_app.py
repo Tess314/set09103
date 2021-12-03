@@ -26,7 +26,11 @@ def init_db():
 
 @app.route("/")
 def root():
-	return "TTTLE"
+    start = '<img src="'
+    url = url_for('static', filename='book.png')
+    end = '">'
+    logo = start+url+end
+    return logo + render_template('index.html')
 
 @app.route("/login/", methods=['POST','GET'])
 def log_in():
@@ -43,8 +47,17 @@ def log_in():
 
 @app.route("/welcome/", methods=['POST','GET'])
 def welcome():
-    #db = get_db()
-    #db.commit()
+    db = get_db()
+    db.commit()
+
+    page = []
+    page.append('<ul>')
+    sql = "SELECT rowid, * FROM books ORDER BY author"
+    for row in db.cursor().execute(sql):
+        page.append('<li>')
+        page.append(str(row))
+        page.append('</li>')
+    page.append('</ul>')
 
     if request.method == 'POST':
         print(request.form)
@@ -52,6 +65,7 @@ def welcome():
         return "You searched for %s" % search
     else:
         return render_template('welcome.html')
+       # return ''.join(page)
 
 @app.route("/add/")
 def add():
@@ -63,7 +77,7 @@ def page_not_found(error):
     url = url_for('static', filename='alice.gif')
     end = '">'
     image = start+url+end
-    return image + render_template("error.html"), 404
+    return image + render_template('error.html'), 404
 
 if __name__ == "main":
     app.run(host='0.0.0.0', debug=True)
