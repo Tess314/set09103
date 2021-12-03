@@ -77,7 +77,7 @@ def page_not_found(error):
     url = url_for('static', filename='alice.gif')
     end = '">'
     image = start+url+end
-    return image + render_template('error.html'), 404
+    return render_template('error.html') + image, 404
 
 if __name__ == "main":
     app.run(host='0.0.0.0', debug=True)
