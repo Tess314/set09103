@@ -49,23 +49,23 @@ def log_in():
 def welcome():
     db = get_db()
     db.commit()
-
     page = []
     page.append('<ul>')
-    sql = "SELECT rowid, * FROM books ORDER BY author"
-    for row in db.cursor().execute(sql):
-        page.append('<li>')
-        page.append(str(row))
-        page.append('</li>')
-    page.append('</ul>')
 
     if request.method == 'POST':
         print(request.form)
         search = request.form['search']
-        return "You searched for %s" % search
+        search_term = "%s" % search
+        sql = "SELECT * FROM books WHERE title = ?"
+        for row in db.cursor().execute(sql, [search_term]):
+            page.append('<li>')
+            page.append(str(row))
+            page.append('</li>')
+        page.append('</ul>')
+        formatting = ''.join(page)
+        return render_template('welcome.html') + formatting
     else:
         return render_template('welcome.html')
-       # return ''.join(page)
 
 @app.route("/add/")
 def add():
