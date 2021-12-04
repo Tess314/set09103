@@ -56,8 +56,8 @@ def welcome():
         print(request.form)
         search = request.form['search']
         search_term = "%s" % search
-        sql = "SELECT * FROM books WHERE title = ?"
-        for row in db.cursor().execute(sql, [search_term]):
+        sql = "SELECT * FROM books WHERE title = ? OR author = ?"
+        for row in db.cursor().execute(sql, [search_term, search_term]):
             page.append('<li>')
             page.append(str(row))
             page.append('</li>')
