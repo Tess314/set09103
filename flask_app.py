@@ -1,4 +1,5 @@
 from flask import Flask, url_for, request, render_template, redirect, g
+from images import convertToBinaryData
 import sqlite3
 
 app = Flask(__name__)
