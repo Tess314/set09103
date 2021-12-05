@@ -76,7 +76,7 @@ def welcome():
     else:
         return render_template('welcome.html')
 
-@app.route("/add/")
+@app.route("/add/", methods=['POST','GET'])
 def add():
     return render_template('add.html')
 
