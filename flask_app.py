@@ -24,13 +24,18 @@ def init_db():
             db.cursor().executescript(f.read())
         db.commit()
 
-@app.route("/")
+@app.route("/", methods=['POST','GET'])
 def root():
-    start = '<img src="'
-    url = url_for('static', filename='book.png')
-    end = '">'
-    logo = start+url+end
-    return logo + render_template('index.html')
+    if request.method == 'POST':
+        print(request.form)
+        start = request.form['start']
+        return redirect('/login/')
+    else:
+        start = '<img src="'
+        url = url_for('static', filename='book.png')
+        end = '">'
+        logo = start+url+end
+        return logo + render_template('index.html')
 
 @app.route("/login/", methods=['POST','GET'])
 def log_in():
@@ -53,17 +58,21 @@ def welcome():
     page.append('<ul>')
 
     if request.method == 'POST':
-        print(request.form)
-        search = request.form['search']
-        search_term = "%s" % search
-        sql = "SELECT * FROM books WHERE title = ? OR author = ?"
-        for row in db.cursor().execute(sql, [search_term, search_term]):
-            page.append('<li>')
-            page.append(str(row))
-            page.append('</li>')
-        page.append('</ul>')
-        formatting = ''.join(page)
-        return render_template('welcome.html') + formatting
+        if request.form['search']:
+            print(request.form)
+            search = request.form['search']
+            search_term = "%s" % search
+            sql = "SELECT * FROM books WHERE title = ? OR author = ?"
+            for row in db.cursor().execute(sql, [search_term, search_term]):
+                page.append('<li>')
+                page.append(str(row))
+                page.append('</li>')
+            page.append('</ul>')
+            formatting = ''.join(page)
+            return render_template('welcome.html') + formatting
+        elif request.form['add']:
+            print(request.form)
+            return redirect('/add/')
     else:
         return render_template('welcome.html')
 
