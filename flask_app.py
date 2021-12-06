@@ -40,6 +40,7 @@ def root():
 
 @app.route("/login/", methods=['POST','GET'])
 def log_in():
+    #login
     if request.method == 'POST':
         print(request.form)
         username = request.form['username']
