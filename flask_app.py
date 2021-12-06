@@ -49,7 +49,7 @@ def root():
 def log_in():
     db = get_db2()
     db.commit()
-    #login
+
     if request.method == 'POST':
         print(request.form)
         username = request.form['username']
@@ -110,6 +110,25 @@ def add():
         return render_template('add.html')
     else:
         return render_template('add.html')
+
+@app.route("/delete/", methods=['POST','GET'])
+def delete():
+    db = get_db1()
+    db.commit()
+
+    if request.method == 'POST':
+        if request.form['delete2']:
+            print(request.form)
+            title = request.form['title']
+            title_entered = "%s" % title
+            author = request.form['author']
+            author_entered = "%s" % author
+            sql = "DELETE FROM books WHERE title=? AND author=?"
+            db.cursor().execute(sql, [title_entered, author_entered])
+            db.commit()
+        return render_template('delete.html')
+    else:
+        return render_template('delete.html')
 
 @app.errorhandler(404)
 def page_not_found(error):
