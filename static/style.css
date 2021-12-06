@@ -11,3 +11,12 @@ h1 {
   display: inline-block;
   text-align: center;
 }
+
+#searchButton {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}
