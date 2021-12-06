@@ -49,6 +49,7 @@ def root():
 def log_in():
     db = get_db2()
     db.commit()
+    #login
     if request.method == 'POST':
         print(request.form)
         username = request.form['username']
