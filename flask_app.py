@@ -1,14 +1,21 @@
 from flask import Flask, url_for, request, render_template, redirect, g
-from images import convertToBinaryData
 import sqlite3
 
 app = Flask(__name__)
-db_location = 'var/books.db'
+db_location1 = 'var/books.db'
+db_location2 = 'var/auth.db'
 
-def get_db():
+def get_db1():
     db = getattr(g, 'db', None)
     if db is None:
-        db = sqlite3.connect(db_location)
+        db = sqlite3.connect(db_location1)
+        g.db = db
+    return db
+
+def get_db2():
+    db = getattr(g, 'db', None)
+    if db is None:
+        db = sqlite3.connect(db_location2)
         g.db = db
     return db
 
@@ -40,6 +47,8 @@ def root():
 
 @app.route("/login/", methods=['POST','GET'])
 def log_in():
+    db = get_db2()
+    db.commit()
     if request.method == 'POST':
         print(request.form)
         username = request.form['username']
@@ -47,13 +56,14 @@ def log_in():
         password = request.form['password']
         print(request.form)
         branch = request.form['branch']
+        sql = "SELECT username, password, branch FROM librarians WHERE username=? AND password=? AND branch=?"
         return redirect('/welcome/')
     else:
         return render_template('login.html')
 
 @app.route("/welcome/", methods=['POST','GET'])
 def welcome():
-    db = get_db()
+    db = get_db1()
     db.commit()
     page = []
     page.append('<ul>')
