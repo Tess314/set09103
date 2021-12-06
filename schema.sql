@@ -4,8 +4,7 @@ DROP TABLE if exists auth;
 CREATE TABLE books (
 	title text,
 	author text,
-	synopsis text,
-	cover blob
+	synopsis text
 );
 
 CREATE TABLE auth (
