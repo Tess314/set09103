@@ -90,7 +90,26 @@ def welcome():
 
 @app.route("/add/", methods=['POST','GET'])
 def add():
-    return render_template('add.html')
+    db = get_db1()
+    db.commit()
+
+    if request.method == 'POST':
+        if request.form['add2']:
+            print(request.form)
+            title = request.form['title']
+            title_entered = "%s" % title
+            print(request.form)
+            author = request.form['author']
+            author_entered = "%s" % author
+            print(request.form)
+            synopsis = request.form['synopsis']
+            synopsis_entered = "%s" % synopsis
+            sql = "INSERT INTO books (title, author, synopsis) VALUES (?,?,?)"
+            db.cursor().execute(sql, [title_entered, author_entered, synopsis_entered])
+            db.commit()
+        return render_template('add.html')
+    else:
+        return render_template('add.html')
 
 @app.errorhandler(404)
 def page_not_found(error):
