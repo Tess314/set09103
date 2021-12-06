@@ -70,6 +70,9 @@ def welcome():
     page.append('<ul>')
 
     if request.method == 'POST':
+        if request.form['action'] == "DELETE BOOK":
+            print(request.form)
+            return redirect('/delete/')
         if request.form['search']:
             print(request.form)
             search = request.form['search']
@@ -82,7 +85,7 @@ def welcome():
             page.append('</ul>')
             formatting = ''.join(page)
             return render_template('welcome.html') + formatting
-        elif request.form['add']:
+        elif request.form['action'] == "ADD BOOK":
             print(request.form)
             return redirect('/add/')
     else:
