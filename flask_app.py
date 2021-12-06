@@ -70,9 +70,6 @@ def welcome():
     page.append('<ul>')
 
     if request.method == 'POST':
-        if request.form['action'] == "DELETE BOOK":
-            print(request.form)
-            return redirect('/delete/')
         if request.form['search']:
             print(request.form)
             search = request.form['search']
@@ -110,7 +107,8 @@ def add():
             sql = "INSERT INTO books (title, author, synopsis) VALUES (?,?,?)"
             db.cursor().execute(sql, [title_entered, author_entered, synopsis_entered])
             db.commit()
-        return render_template('add.html')
+            message = "Book added successfully"
+        return render_template('add.html') + message
     else:
         return render_template('add.html')
 
