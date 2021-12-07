@@ -53,10 +53,13 @@ def log_in():
     if request.method == 'POST':
         print(request.form)
         username = request.form['username']
+        username_entered = "%s" % username
         print(request.form)
         password = request.form['password']
+        password_entered = "%s" % password
         print(request.form)
         branch = request.form['branch']
+        branch_entered = "%s" % branch
         sql = "SELECT username, password, branch FROM librarians WHERE username=? AND password=? AND branch=?"
         return redirect('/welcome/')
     else:
