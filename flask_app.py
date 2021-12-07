@@ -107,29 +107,9 @@ def add():
             sql = "INSERT INTO books (title, author, synopsis) VALUES (?,?,?)"
             db.cursor().execute(sql, [title_entered, author_entered, synopsis_entered])
             db.commit()
-            message = "Book added successfully"
-        return render_template('add.html') + message
+        return render_template('add.html')
     else:
         return render_template('add.html')
-
-@app.route("/delete/", methods=['POST','GET'])
-def delete():
-    db = get_db1()
-    db.commit()
-
-    if request.method == 'POST':
-        if request.form['delete2']:
-            print(request.form)
-            title = request.form['title']
-            title_entered = "%s" % title
-            author = request.form['author']
-            author_entered = "%s" % author
-            sql = "DELETE FROM books WHERE title=? AND author=?"
-            db.cursor().execute(sql, [title_entered, author_entered])
-            db.commit()
-        return render_template('delete.html')
-    else:
-        return render_template('delete.html')
 
 @app.errorhandler(404)
 def page_not_found(error):
