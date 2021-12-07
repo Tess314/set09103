@@ -3,19 +3,11 @@ import sqlite3
 
 app = Flask(__name__)
 db_location1 = 'var/books.db'
-db_location2 = 'var/auth.db'
 
 def get_db1():
     db = getattr(g, 'db', None)
     if db is None:
         db = sqlite3.connect(db_location1)
-        g.db = db
-    return db
-
-def get_db2():
-    db = getattr(g, 'db', None)
-    if db is None:
-        db = sqlite3.connect(db_location2)
         g.db = db
     return db
 
@@ -37,33 +29,13 @@ def root():
     if request.method == 'POST':
         print(request.form)
         start = request.form['start']
-        return redirect('/login/')
+        return redirect('/welcome/')
     else:
         start = '<img src="'
         url = url_for('static', filename='book.png')
         end = '">'
         logo = start+url+end
         return logo + render_template('index.html')
-
-@app.route("/login/", methods=['POST','GET'])
-def log_in():
-    db = get_db2()
-    db.commit()
-
-    if request.method == 'POST':
-        print(request.form)
-        username = request.form['username']
-        username_entered = "%s" % username
-        print(request.form)
-        password = request.form['password']
-        password_entered = "%s" % password
-        print(request.form)
-        branch = request.form['branch']
-        branch_entered = "%s" % branch
-        sql = "SELECT username, password, branch FROM librarians WHERE username=? AND password=? AND branch=?"
-        return redirect('/welcome/')
-    else:
-        return render_template('login.html')
 
 @app.route("/welcome/", methods=['POST','GET'])
 def welcome():
