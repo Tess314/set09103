@@ -19,7 +19,6 @@ p {
 .column {
   float: left;
   width: 33.33%;
-  padding: 3px;
 }
 
 .row::after {
