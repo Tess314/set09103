@@ -62,6 +62,13 @@ input[type=text]{
     outline: none;
 }
 
+#homeButton {
+    align: right;
+    color: #ffffff;
+    font-size: 20px;
+    background-color: #962547;
+}
+
 #regularButton {
     color: #ffffff;
     background-color: #962547;
