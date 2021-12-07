@@ -61,3 +61,8 @@ input[type=text]{
     overflow: hidden;
     outline: none;
 }
+
+#regularButton {
+    color: #ffffff;
+    background-color: #962547;
+}
