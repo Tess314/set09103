@@ -11,6 +11,10 @@ p {
   text-align: center;
 }
 
+.searchForm {
+  border-radius: 2px;
+}
+
 .images {
     width:  150px;
     height: auto;
