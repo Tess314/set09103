@@ -16,6 +16,11 @@ p {
   text-align: center;
 }
 
+.coverDiv {
+  height: 200px;
+  width: 50%;
+}
+
 #searchButton {
     background-color: transparent;
     background-repeat: no-repeat;
