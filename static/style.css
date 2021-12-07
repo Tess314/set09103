@@ -33,6 +33,17 @@ p {
   display: table;
 }
 
+
+#startButton {
+    text-color: #962547;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}
+
 #searchButton {
     background-color: transparent;
     background-repeat: no-repeat;
