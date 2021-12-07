@@ -81,7 +81,8 @@ def welcome():
                 page.append('</li>')
             page.append('</ul>')
             formatting = ''.join(page)
-            return render_template('welcome.html') + formatting
+            message = "Here's what we found:"
+            return render_template('welcome.html', message=message) + formatting
         elif request.form['action'] == "ADD BOOK":
             print(request.form)
             return redirect('/add/')
