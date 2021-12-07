@@ -11,6 +11,12 @@ p {
   text-align: center;
 }
 
+img {
+    width:  100px;
+    height: 100px;
+    object-fit: cover;
+}
+
 .formDiv {
   display: inline-block;
   text-align: center;
