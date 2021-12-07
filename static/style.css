@@ -12,7 +12,7 @@ p {
 }
 
 img {
-    width:  100px;
+    width:  auto;
     height: auto;
     object-fit: cover;
 }
