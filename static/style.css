@@ -11,8 +11,8 @@ p {
   text-align: center;
 }
 
-.searchForm {
-  border-radius: 2px;
+input[type=text]{
+  border-radius:10px;
 }
 
 .images {
