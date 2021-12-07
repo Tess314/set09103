@@ -13,6 +13,9 @@
 			<input id="searchButton" type="submit" value="🔎︎" name="search" id="submit"/>
 			<br>
 			<br>
+			{% if formatting %}
+			<p id="text">{{ formatting }}</p>
+			{% endif %}
 			<p>Not finding what you're looking for?</p>
 			<input type="submit" value="ADD BOOK" name="action" id="submit"/>
 			<br>
