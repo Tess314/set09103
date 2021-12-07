@@ -20,23 +20,21 @@
 		</form>
 	</div>
 	
-	<div class="images">
-		<div class="row">
-		  <div class="column">
-		    <img src="{{url_for('static', filename='1984.jpg')}}" /> 
-		  </div>
-		  <div class="column">
-		    <img src="{{url_for('static', filename='newworld.jpg')}}" />
-		  </div>
-		  <div class="column">
-		   <img src="{{url_for('static', filename='f451.jpg')}}" /> 
-		  </div>
-		  <div class="column">
-		   <img src="{{url_for('static', filename='martian.jpg')}}" /> 
-		  </div>
-		</div>
+	<div class="row">
+	  <div class="column">
+	    <img src="{{url_for('static', filename='1984.jpg')}}" class="images"/> 
+	  </div>
+	  <div class="column">
+	    <img src="{{url_for('static', filename='newworld.jpg')}}" class="images"/>
+	  </div>
+	  <div class="column">
+	   <img src="{{url_for('static', filename='f451.jpg')}}" class="images"/> 
+	  </div>
+	  <div class="column">
+	   <img src="{{url_for('static', filename='martian.jpg')}}" class="images"/> 
+	  </div>
 	</div>
-	
+
 	{% if message %}
 	<p id="text">{{ message }}</p>
 	{% endif %}
