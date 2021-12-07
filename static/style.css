@@ -11,7 +11,7 @@ p {
   text-align: center;
 }
 
-img {
+.images {
     width:  150px;
     height: auto;
     object-fit: cover;
