@@ -13,9 +13,6 @@
 			<input id="searchButton" type="submit" value="🔎︎" name="search" id="submit"/>
 			<br>
 			<br>
-			{% if message %}
-			<p id="text">{{ message }}</p>
-			{% endif %}
 			<p>Not finding what you're looking for?</p>
 			<input type="submit" value="ADD BOOK" name="action" id="submit"/>
 			<br>
@@ -37,6 +34,10 @@
 	   <img src="{{url_for('static', filename='martian.jpg')}}" /> 
 	  </div>
 	</div>
+	
+	{% if message %}
+	<p id="text">{{ message }}</p>
+	{% endif %}
 	
 </body>
 
