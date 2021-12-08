@@ -42,7 +42,7 @@ def welcome():
     db = get_db1()
     db.commit()
     page = []
-    page.append('<ul>')
+    page.append('<table>')
 
     if request.method == 'POST':
         if request.form['search']:
@@ -51,10 +51,10 @@ def welcome():
             search_term = "%s" % search
             sql = "SELECT * FROM books WHERE title LIKE ? OR author LIKE ? OR synopsis LIKE ?"
             for row in db.cursor().execute(sql, ['%'+search_term+'%', '%'+search_term+'%', '%'+search_term+'%',]):
-                page.append('<li>')
+                page.append('<td>')
                 page.append(str(row))
-                page.append('</li>')
-            page.append('</ul>')
+                page.append('<td>')
+            page.append('</table>')
             formatting = ''.join(page)
             message = "Here's what we found:"
             return render_template('welcome.html', message=message) + formatting
