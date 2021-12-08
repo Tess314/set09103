@@ -2,12 +2,13 @@ from flask import Flask, url_for, request, render_template, redirect, g
 import sqlite3
 
 app = Flask(__name__)
-db_location1 = 'var/books.db'
+db_location = 'var/books.db'
 
-def get_db1():
+# DB setup and config
+def get_db():
     db = getattr(g, 'db', None)
     if db is None:
-        db = sqlite3.connect(db_location1)
+        db = sqlite3.connect(db_location)
         g.db = db
     return db
 
@@ -17,6 +18,7 @@ def close_db_connection(exception):
     if db is not None:
         db.close()
 
+# Loads in schema file and initialises DB
 def init_db():
     with app.app_context():
         db = get_db()
@@ -24,6 +26,7 @@ def init_db():
             db.cursor().executescript(f.read())
         db.commit()
 
+# Start page - loads up logo and redirect to welcome page
 @app.route("/", methods=['POST','GET'])
 def root():
     if request.method == 'POST':
@@ -37,9 +40,10 @@ def root():
         logo = start+url+end
         return logo + render_template('index.html')
 
+# Welcome page - executes search query on DB
 @app.route("/welcome/", methods=['POST','GET'])
 def welcome():
-    db = get_db1()
+    db = get_db()
     db.commit()
     page = []
     page.append('<table>')
@@ -64,9 +68,10 @@ def welcome():
     else:
         return render_template('welcome.html')
 
+# Add page - executes insert on DB
 @app.route("/add/", methods=['POST','GET'])
 def add():
-    db = get_db1()
+    db = get_db()
     db.commit()
 
     if request.method == 'POST':
@@ -87,6 +92,7 @@ def add():
     else:
         return render_template('add.html')
 
+# Custom 404 page - returns error message and image
 @app.errorhandler(404)
 def page_not_found(error):
     start = '<img src="'
