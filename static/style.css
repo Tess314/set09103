@@ -1,8 +1,10 @@
+/*Blue background with text centred*/
 body {
   background-color: #38b6ff;
   text-align: center;
 }
 
+/*Red, centred text*/
 h1 {
   text-align: center;
   color: #962547;
@@ -12,6 +14,7 @@ p {
   text-align: center;
 }
 
+/*rounded input fields*/
 input[type=text]{
   border-radius:10px;
   height: 20px;
@@ -29,6 +32,7 @@ input[type=text]{
   text-align: center;
 }
 
+/*formatting to display book coverss*/
 .column {
   float: left;
   width: 25%;
@@ -40,7 +44,7 @@ input[type=text]{
   display: table;
 }
 
-
+/*Red text with no border*/
 #startButton {
     color: #962547;
     font-size: 25px;
@@ -52,6 +56,7 @@ input[type=text]{
     outline: none;
 }
 
+/*Red icon with no border*/
 #searchButton {
     color: #962547;
     font-size: 20px;
@@ -63,6 +68,7 @@ input[type=text]{
     outline: none;
 }
 
+/*White text, red background*/
 #homeButton {
     color: #ffffff;
     font-size: 20px;
@@ -70,6 +76,7 @@ input[type=text]{
     float: right;
 }
 
+/*White text, red background*/
 #regularButton {
     color: #ffffff;
     background-color: #962547;
