@@ -2,6 +2,7 @@
 <html>
 
 <head>
+  <!--Link to stylesheet in static folder-->
   <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
 </head>
 
@@ -38,6 +39,7 @@
 	  </div>
 	</div>
 
+	<!--Stating message text placement-->
 	{% if message %}
 	<p id="text">{{ message }}</p>
 	{% endif %}
